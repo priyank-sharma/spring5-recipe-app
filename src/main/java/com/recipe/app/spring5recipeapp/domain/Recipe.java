@@ -1,5 +1,6 @@
 package com.recipe.app.spring5recipeapp.domain;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -26,11 +27,13 @@ public class Recipe {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	private String description;
 	private int prepTime;
 	private int cookTime;
 	private int servings;
 	private String source;
 	private String url;
+	@Lob
 	private String directions;
 	@Enumerated(value = EnumType.STRING)
 	private Difficulty difficulty;
@@ -41,13 +44,21 @@ public class Recipe {
 	private Notes notes;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
-	Set<Ingredients> ingredients;
+	Set<Ingredients> ingredients = new HashSet<Ingredients>();
 	
 	@ManyToMany
 	@JoinTable(name = "recipe_category", 
 	joinColumns = @JoinColumn(name = "recipe_id"),
 	inverseJoinColumns = @JoinColumn(name = "category_id"))
-	Set<Category> categories;
+	Set<Category> categories = new HashSet<Category>();
+
+	public Set<Category> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(Set<Category> categories) {
+		this.categories = categories;
+	}
 
 	public Set<Ingredients> getIngredients() {
 		return ingredients;
@@ -135,6 +146,14 @@ public class Recipe {
 
 	public void setDifficulty(Difficulty difficulty) {
 		this.difficulty = difficulty;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }
