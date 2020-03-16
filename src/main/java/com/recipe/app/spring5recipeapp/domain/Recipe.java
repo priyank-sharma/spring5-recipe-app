@@ -51,6 +51,12 @@ public class Recipe {
 	joinColumns = @JoinColumn(name = "recipe_id"),
 	inverseJoinColumns = @JoinColumn(name = "category_id"))
 	Set<Category> categories = new HashSet<Category>();
+	
+	public Recipe addIngredient(Ingredients ingredients) {
+		ingredients.setRecipe(this);
+		this.ingredients.add(ingredients);
+		return this;
+	}
 
 	public Set<Category> getCategories() {
 		return categories;
@@ -138,6 +144,7 @@ public class Recipe {
 
 	public void setNotes(Notes notes) {
 		this.notes = notes;
+		notes.setRecipe(this);
 	}
 
 	public Difficulty getDifficulty() {

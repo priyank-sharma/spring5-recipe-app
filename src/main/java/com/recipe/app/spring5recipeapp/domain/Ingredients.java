@@ -26,6 +26,13 @@ public class Ingredients {
 	@OneToOne(fetch = FetchType.EAGER)
 	private UnitOfMeasure unitOfMeasure;
 
+	public Ingredients(String description, BigDecimal amount, UnitOfMeasure unitOfMeasure) {
+		// TODO Auto-generated constructor stub
+		this.description = description;
+		this.amount = amount;
+		this.unitOfMeasure = unitOfMeasure;
+	}
+	
 	public Ingredients(String description, BigDecimal amount, UnitOfMeasure unitOfMeasure, Recipe recipe) {
 		// TODO Auto-generated constructor stub
 		this.description = description;
