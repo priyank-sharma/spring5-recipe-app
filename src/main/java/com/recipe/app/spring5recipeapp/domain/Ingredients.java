@@ -11,6 +11,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
+@Data
+@EqualsAndHashCode(exclude = {"recipe"})
 @Entity
 public class Ingredients {
 	
@@ -20,11 +26,14 @@ public class Ingredients {
 	private String description;
 	private BigDecimal amount;
 	
+	@ToString.Exclude
 	@ManyToOne
 	private Recipe recipe;
 	
 	@OneToOne(fetch = FetchType.EAGER)
 	private UnitOfMeasure unitOfMeasure;
+	
+	public Ingredients() {}
 
 	public Ingredients(String description, BigDecimal amount, UnitOfMeasure unitOfMeasure) {
 		// TODO Auto-generated constructor stub
@@ -40,45 +49,4 @@ public class Ingredients {
 		this.unitOfMeasure = unitOfMeasure;
 		this.recipe = recipe;
 	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public BigDecimal getAmount() {
-		return amount;
-	}
-
-	public void setAmount(BigDecimal amount) {
-		this.amount = amount;
-	}
-
-	public Recipe getRecipe() {
-		return recipe;
-	}
-
-	public void setRecipe(Recipe recipe) {
-		this.recipe = recipe;
-	}
-
-	public UnitOfMeasure getUnitOfMeasure() {
-		return unitOfMeasure;
-	}
-
-	public void setUnitOfMeasure(UnitOfMeasure unitOfMeasure) {
-		this.unitOfMeasure = unitOfMeasure;
-	}
-
 }

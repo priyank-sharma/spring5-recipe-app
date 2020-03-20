@@ -20,6 +20,9 @@ import com.recipe.app.spring5recipeapp.repository.CategoryRepository;
 import com.recipe.app.spring5recipeapp.repository.RecipeRepository;
 import com.recipe.app.spring5recipeapp.repository.UnitOfMeasureRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Component
 public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
@@ -42,6 +45,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		// TODO Auto-generated method stub
 		recipeRepository.saveAll(getRecipes());
+		log.debug("loading bootstrap data");
 	}
 
 	public List<Recipe> getRecipes() {

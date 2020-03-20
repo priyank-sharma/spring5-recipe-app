@@ -13,6 +13,9 @@ import com.recipe.app.spring5recipeapp.repository.CategoryRepository;
 import com.recipe.app.spring5recipeapp.repository.UnitOfMeasureRepository;
 import com.recipe.app.spring5recipeapp.service.RecipeService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 public class IndexController {
 	
@@ -25,7 +28,8 @@ public class IndexController {
 
     @RequestMapping({"", "/", "/index"})
     public String getIndexPage(Model model) {
-
+    	log.debug("Getting index page");
+    	log.info("inside index page");
         model.addAttribute("recipes", recipeService.getRecipes());
 
         return "index";
